@@ -21,8 +21,8 @@ int main(int argc, char* argv[]){
         }
 
 
-        tcp::socket socket(io_context);
         for(;;){
+            tcp::socket socket(io_context);
             asio::connect(socket, endpoints);
 
             std::array<char, 128> buf;
@@ -42,8 +42,6 @@ int main(int argc, char* argv[]){
                 std::cout.write(buf.data(), len);
                 std::cout << std::endl;
             }
-
-            socket.close();
         }
 
     }catch(const std::exception& e){

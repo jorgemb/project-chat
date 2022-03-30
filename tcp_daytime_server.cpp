@@ -88,9 +88,9 @@ int main(){
         asio::io_context context;
         tcp_server server(context);
 
-        // auto f1 = std::async(std::launch::async, [&](){ context.run(); });
-        // auto f2 = std::async(std::launch::async, [&](){ context.run(); });
-        // auto f3 = std::async(std::launch::async, [&](){ context.run(); });
+         //auto f1 = std::async(std::launch::async, [&](){ context.run(); });
+         //auto f2 = std::async(std::launch::async, [&](){ context.run(); });
+         //auto f3 = std::async(std::launch::async, [&](){ context.run(); });
         context.run();
     }catch(const std::exception& e){
         std::cerr << "EXCEPTION: " << e.what() << std::endl;
