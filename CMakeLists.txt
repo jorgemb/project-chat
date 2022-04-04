@@ -9,9 +9,17 @@ find_package(Threads REQUIRED)
 add_definitions("-DASIO_STANDALONE")
 add_library(asio INTERFACE)
 target_include_directories(asio INTERFACE asio/asio/include)
+target_link_libraries(asio INTERFACE Threads::Threads)
 
-add_executable(chat_client client.cpp connection.h "connection.cpp")
-target_link_libraries(chat_client PRIVATE asio Threads::Threads)
+set(CONNECTIONLIB_SOURCE connection.h connection.cpp)
+add_library(connectionlib STATIC ${CONNECTIONLIB_SOURCE})
+target_link_libraries(connectionlib PUBLIC asio)
+
+add_executable(chat_client client.cpp)
+target_link_libraries(chat_client PRIVATE connectionlib)
+
+add_executable(chat_server server.cpp)
+target_link_libraries(chat_server PRIVATE connectionlib)
 
 # Examples
 add_executable(daytime_server "examples/tcp_daytime_server.cpp")

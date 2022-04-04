@@ -18,23 +18,36 @@ int main(int argc, char* argv[]) {
 	std::string host(argv[1]);
 	std::string port(argv[2]);
 
-
 	// Start asio context
-	asio::io_context context;
-	auto connection = TcpConnection::create(context, asio::ip::tcp::endpoint(asio::ip::address_v4::from_string(host), 5555));
-	connection->start_reading_async();
+	try {
+		asio::io_context context;
 
-	asio::steady_timer timer(context, 10s);
-	timer.async_wait([connection](auto error) { connection->close(); });
+		asio::ip::tcp::resolver resolver(context);
+		auto endpoints = resolver.resolve(host, port);
 
-	auto f = std::async(std::launch::async, [&context]() { context.run(); });
+		auto connection = TcpConnection::create(context, endpoints);
 
-	while (std::cin) {
-		std::string message;
-		std::cout << "Message: ";
-		std::cin >> message;
+		auto buffer = std::make_shared <std::array<char, 1024>>();
+		connection->start_reading_async([buffer](auto message) {
+			// Get all input from stdin
+			std::cout << std::move(message) << std::endl;
+		});
 
-		connection->write_async(message);
+		auto f = std::async(std::launch::async, [&context]() { context.run(); });
+
+		while (std::cin && connection->is_connected()) {
+			std::string message;
+			std::cout << "> ";
+			std::getline(std::cin, message);
+
+			if (!message.empty()) {
+				connection->write_async(message);
+			}
+		}
+		connection->close();
+	}
+	catch (const std::exception& e) {
+		std::cerr << "ERROR: " << e.what() << std::endl;
 	}
 
 	return 0;
