@@ -33,6 +33,18 @@ int main(int argc, char* argv[]) {
 			std::cout << std::move(message) << std::endl;
 		});
 
+		// Handle signals
+		asio::signal_set signals(context, SIGINT, SIGTERM);
+		signals.async_wait([connection](auto error, int signal){
+			if(!error){
+				if (signal == SIGINT) std::cout << "Ctrl+C received... exiting" << std::endl;
+				else if (signal == SIGTERM) std::cout << "SIGTERM received... exiting" << std::endl;
+
+				connection->close();
+			}
+		});
+
+		// Start running in another process
 		auto f = std::async(std::launch::async, [&context]() { context.run(); });
 
 		while (std::cin && connection->is_connected()) {

@@ -1,0 +1,7 @@
+.devcontainer
+.vs
+out/
+build/
+.git/
+.gitignore
+.gitmodules

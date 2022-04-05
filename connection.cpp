@@ -58,7 +58,7 @@ void TcpConnection::start_reading_async(std::function<void(std::string&& msg)> h
 				start_reading_async(handler);
 			}
 			else if (error) {
-				std::cerr << "Connection error: (" << error.value() << ") - " << error.message() << std::endl;
+				std::cerr << "CONNECTION ERROR: (" << error.value() << ") - " << error.message() << std::endl;
 				m_socket.close();
 			}
 
@@ -130,7 +130,9 @@ void TcpServer::start_accepting() {
 				// Continue loop
 				if(m_continue) start_accepting();
 			}
-			else {
+			else if(error == asio::error::operation_aborted){
+				std::cerr << "CLOSING SERVER" << std::endl;
+			} else{
 				std::cerr << "SERVER ERROR: " << error.message() << std::endl;
 			}
 

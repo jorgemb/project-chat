@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  server:
+    image: project-chat:latest
+    command: ["./chat_server", "5555"]
+    restart: always
+  
+  client:
+    image: project-chat:latest
+    command: ["./chat_client", "server", "5555"]
+    depends_on:
+      - server
+    tty: true
+    deploy:
+      mode: replicated
+      replicas: 10
+    
