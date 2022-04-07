@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.224.3/containers/docker-existing-dockerfile
 {
-	"name": "Existing Dockerfile",
+	"name": "Dev Docker - Clang",
 
 	// Sets the run context to one level up instead of the .devcontainer folder.
 	"context": "..",
@@ -13,7 +13,8 @@
 	"settings": {},
 	
 	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": ["ms-vscode.cpptools", "ms-vscode.cpptools-extension-pack", "ms-vscode.cmake-tools", "akiramiyakoda.cppincludeguard"]
+	// "extensions": ["ms-vscode.cpptools", "ms-vscode.cpptools-extension-pack", "ms-vscode.cmake-tools", "akiramiyakoda.cppincludeguard"]
+	"extensions": ["llvm-vs-code-extensions.vscode-clangd", "ms-vscode.cmake-tools", "akiramiyakoda.cppincludeguard", "ms-azuretools.vscode-docker"]
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

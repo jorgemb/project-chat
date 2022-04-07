@@ -27,3 +27,9 @@ target_link_libraries(daytime_server PRIVATE asio Threads::Threads)
 
 add_executable(daytime_client "examples/tcp_daytime_client.cpp")
 target_link_libraries(daytime_client PRIVATE asio Threads::Threads)
+
+add_executable(example_server "examples/chat_server.cpp" "examples/chat_message.hpp")
+target_link_libraries(example_server PRIVATE asio Threads::Threads)
+
+add_executable(example_client "examples/posix_chat_client.cpp" "examples/chat_message.hpp")
+target_link_libraries(example_client PRIVATE asio Threads::Threads)
