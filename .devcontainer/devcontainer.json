@@ -13,8 +13,8 @@
 	"settings": {},
 	
 	// Add the IDs of extensions you want installed when the container is created.
-	// "extensions": ["ms-vscode.cpptools", "ms-vscode.cpptools-extension-pack", "ms-vscode.cmake-tools", "akiramiyakoda.cppincludeguard"]
-	"extensions": ["llvm-vs-code-extensions.vscode-clangd", "ms-vscode.cmake-tools", "akiramiyakoda.cppincludeguard", "ms-azuretools.vscode-docker"]
+	"extensions": ["ms-vscode.cpptools", "ms-vscode.cpptools-extension-pack", "ms-vscode.cmake-tools", "akiramiyakoda.cppincludeguard", "ms-azuretools.vscode-docker"]
+	// "extensions": ["llvm-vs-code-extensions.vscode-clangd", "ms-vscode.cmake-tools", "akiramiyakoda.cppincludeguard", "ms-azuretools.vscode-docker"]
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

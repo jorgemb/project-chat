@@ -49,3 +49,6 @@ out/
 # Visual studio
 .vs/
 .vscode/
+
+# clangd
+.cache/
