@@ -4,12 +4,16 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED true)
 # set(CMAKE_CXX_EXTENSIONS true)
 
+# Add conan packages
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup(TARGETS)
+
+# Add other packages
 find_package(Threads REQUIRED)
 
 add_definitions("-DASIO_STANDALONE")
 add_library(asio INTERFACE)
-target_include_directories(asio INTERFACE asio/asio/include)
-target_link_libraries(asio INTERFACE Threads::Threads)
+target_link_libraries(asio INTERFACE Threads::Threads CONAN_PKG::asio)
 
 set(CONNECTIONLIB_SOURCE connection.h connection.cpp)
 add_library(connectionlib STATIC ${CONNECTIONLIB_SOURCE})
