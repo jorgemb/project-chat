@@ -1,5 +1,4 @@
 #include "connection.h"
-#include "connection.h"
 #include <stdexcept>
 #include <iostream>
 #include <sstream>
